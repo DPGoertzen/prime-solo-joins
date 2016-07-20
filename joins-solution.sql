@@ -11,7 +11,8 @@ select warehouse.warehouse from warehouse inner join warehouse_product on (wareh
 select warehouse.warehouse from warehouse inner join warehouse_product on (warehouse.id = warehouse_product.warehouse_id) inner join products on (products.id = warehouse_product.product_id) where products.description = 'diet pepsi';
 
 -- 5. Get the number of orders for each customer. NOTE: It is OK if those without orders are not included in results.
-select customers.*, orders.order_date from customers inner join addresses on (customers.id = addresses.customer_id) inner join orders on (addresses.id = orders.address_id);
+select customers.first_name, customers.last_name, count(orders.id) from customers inner join addresses on (customers.id = addresses.customer_id) inner join orders on (addresses.id = orders.address_id) group by customers.first_name, customers.last_name;
+
 
 -- 6. How many customers do we have?
 select count(first_name) from customers;
